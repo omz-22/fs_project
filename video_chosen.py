@@ -15,9 +15,9 @@ import sys
 from datetime import timedelta
  
 # Load Yolo
-yolo_weight = "yolov3-custom_last.weights"
+yolo_weight = "yolov3.weights"
 yolo_config = "yolov3.cfg"
-coco_labels = "custom.names"
+coco_labels = "class.names"
 net = cv2.dnn.readNet(yolo_weight, yolo_config)
 net = cv2.dnn.readNet(yolo_weight, yolo_config)
 classes = []
@@ -34,7 +34,7 @@ fWidth = 640
 fHeight = 480
  
 # Below function will read video frames
-cap = cv2.VideoCapture('video-big.mp4')
+cap = cv2.VideoCapture('video.mp4')
 writer = None
 fps = cap.get(cv2.CAP_PROP_FPS)
 timestamps = [cap.get(cv2.CAP_PROP_POS_MSEC)]
