@@ -21,8 +21,8 @@ coco_labels = "class.names"
 net = cv2.dnn.readNet(yolo_weight, yolo_config)
 net = cv2.dnn.readNet(yolo_weight, yolo_config)
 
-net.setPreferableBackend(cv2.dnn.DNN_BACKEND_CUDA)
-net.setPreferableTarget(cv2.dnn.DNN_TARGET_CUDA)
+net.setPreferableBackend(cv.dnn.DNN_BACKEND_OPENCV)
+net.setPreferableTarget(cv.dnn.DNN_TARGET_OPENCL_FP16)
 
 classes = []
 with open(coco_labels, "r") as f:
