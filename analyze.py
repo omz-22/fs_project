@@ -19,16 +19,15 @@ yolo_weight = "yolov3.weights"
 yolo_config = "yolov3.cfg"
 coco_labels = "class.names"
 net = cv2.dnn.readNet(yolo_weight, yolo_config)
-net = cv2.dnn.readNet(yolo_weight, yolo_config)
 
-net.setPreferableBackend(cv2.dnn.DNN_BACKEND_OPENCV)
-net.setPreferableTarget(cv2.dnn.DNN_TARGET_OPENCL_FP16)
+net.setPreferableBackend(cv2.dnn.DNN_BACKEND_CUDA)
+net.setPreferableTarget(cv2.dnn.DNN_TARGET_CUDA)
 
 classes = []
 with open(coco_labels, "r") as f:
     classes = [line.strip() for line in f.readlines()]
 layer_names = net.getLayerNames()
-output_layers = [layer_names[i[0] - 1] for i in net.getUnconnectedOutLayers()]
+output_layers = [layer_names[i - 1] for i in net.getUnconnectedOutLayers()]
 colors = np.random.uniform(0, 255, size=(len(classes), 3))
 starting_time = time.time()
 img_id = 0
@@ -152,11 +151,11 @@ while True:
     #cv2.imshow("Image", img)
     writer.write(img)   
     
-    key = cv2.waitKey(1)
-    if key == 27:
-        print("[button pressed] ///// [esc].")
-        print("[feedback] ///// Videocapturing succesfully stopped")
-        break
+    #key = cv2.waitKey(1)
+   # if key == 27:
+       # print("[button pressed] ///// [esc].")
+      #  print("[feedback] ///// Videocapturing succesfully stopped")
+       # break
 
     
     sys.stdout.close()
@@ -165,7 +164,7 @@ writer.release()
 
 #img.release()
     
-cv2.destroyAllWindows()
+#cv2.destroyAllWindows()
     
     
     
